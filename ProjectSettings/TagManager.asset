@@ -9,6 +9,7 @@ TagManager:
   - Apple
   - Head
   - Tail
+  - Body
   layers:
   - Default
   - TransparentFX

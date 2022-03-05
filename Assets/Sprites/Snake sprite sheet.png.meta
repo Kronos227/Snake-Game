@@ -11,6 +11,12 @@ TextureImporter:
   - first:
       213: -7600013060521682984
     second: Snake sprite sheet_3
+  - first:
+      213: 5894117397210060011
+    second: Snake sprite sheet_4
+  - first:
+      213: 6738920024537086643
+    second: Snake sprite sheet_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -150,7 +156,7 @@ TextureImporter:
         width: 49
         height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -158,6 +164,48 @@ TextureImporter:
       bones: []
       spriteID: 8d796475364578690800000000000000
       internalID: -7600013060521682984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake sprite sheet_4
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 0
+        width: 32
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be4d72d5b8c1cc150800000000000000
+      internalID: 5894117397210060011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake sprite sheet_5
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 0
+        width: 28
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3babc48de04758d50800000000000000
+      internalID: 6738920024537086643
       vertices: []
       indices: 
       edges: []

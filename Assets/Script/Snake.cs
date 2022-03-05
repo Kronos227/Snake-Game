@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-#region Snake
-
 public class Snake : MonoBehaviour
-
 {
 
     #region Properties
+    //Create and declared a Array like List type where add the body for the snake 
+    //when eat the apple
+    public List<Transform> _body = new List<Transform>();
+    //Prefab is a Object thas save in Unity like a model or objectecycle
+    //create in Unity
+    //_bodyPrefab and use for specify what is the component to add for the List
+    public Transform _bodyPrefab;
 
+    public Transform _tailPrefab;
     /// <summary>
 
     /// Varible tipo enum que asigna a las variables left, right,
@@ -61,6 +66,9 @@ public class Snake : MonoBehaviour
 
     public BoxCollider2D gridArea;
 
+    //Create and declared a Array like List type where add the body for the snake 
+    //when eat the apple
+
 
     #endregion
 
@@ -71,15 +79,18 @@ public class Snake : MonoBehaviour
     void Start()
 
     {
-
+        transform.localRotation = Quaternion.Euler(0, 0, -90);
+        _body[0].rotation = Quaternion.Euler(0, 0, 90);
+        InvokeRepeating("Move", _frameRate, _frameRate);
         //Invocamos al metodo Move en start para que se instancien las variables de
 
         //movement, junto con frameRate y nextStep
 
         //usamos el comando InvokeRepeating("MethodName", time.deltaTime,time.deltaTime)
-        
+
         RandomizePosition();
         InvokeRepeating("Move", _frameRate, _frameRate);
+
 
     }
 
@@ -155,14 +166,20 @@ public class Snake : MonoBehaviour
 
         transform.position += nextPos;
 
+        MoveBody();
     }
 
-
-
+    public void MoveBody()
+    {
+        for (int i = 0; i < _body.Count; i++)
+        {
+            Vector3 temp = _body[i].position;
+            _body[i].position = _lastPos;
+            _lastPos = temp;
+        }
+    }
 
     #endregion
-
-
 
     #region Update
 
@@ -185,7 +202,7 @@ public class Snake : MonoBehaviour
         x = Mathf.Round(x);
         y = Mathf.Round(y);
 
-        transform.position = new Vector3(Mathf.Round(x), Mathf.Round(y),0.0f);
+        transform.position = new Vector3(Mathf.Round(x), Mathf.Round(y), 0.0f);
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -197,58 +214,50 @@ public class Snake : MonoBehaviour
         }
         else if (collider.CompareTag("Apple"))
         {
-            RandomizePosition();
+            _body.Add(Instantiate(_bodyPrefab, _body[_body.Count - 1].position, Quaternion.identity).transform);
             print("Eat the Apple");
         }
-        
     }
-    
+
     void Update()
 
     {
-
-        //Compararemos las entradas del player para compararlas con los movimeintos que estan
-
-        //declarados en la variable Movements left, right, up y down.
-
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-
-            //Si cumple asignamos ese valor a la variable derivada de Movements : movement hacia arriba
-
             _movement = Movements.up;
-
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
+            for (int i = 0; i < _body.Count; i++)
+            {
+                _body[i].rotation = Quaternion.Euler(0, 0, 0);
+            }
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-
-            //Si cumple asignamos ese valor a la variable derivada de Movements : movement hacia abajo
-
             _movement = Movements.down;
-
+            transform.localRotation = Quaternion.Euler(0, 0, 180);
+            for (int i = 0; i < _body.Count; i++)
+            {
+                _body[i].rotation = Quaternion.Euler(0, 0, 180);
+            }
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-
-            //Si cumple asignamos ese valor a la variable derivada de Movements : movement hacia la izquierda
-
             _movement = Movements.left;
-
+            transform.localRotation = Quaternion.Euler(0, 0, 90);
+            for (int i = 0; i < _body.Count; i++)
+            {
+                _body[i].rotation = Quaternion.Euler(0, 0, 90);
+            }
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-
-            //Si cumple asignamos ese valor a la variable derivada de Movements : movement hacia la derecha
-
             _movement = Movements.right;
-
+            transform.localRotation = Quaternion.Euler(0, 0, -90);
+            for (int i = 0; i < _body.Count; i++)
+            {
+                _body[i].rotation = Quaternion.Euler(0, 0, -90);
+            }
         }
-
     }
-
-    
-
     #endregion
 }
-
-#endregion
